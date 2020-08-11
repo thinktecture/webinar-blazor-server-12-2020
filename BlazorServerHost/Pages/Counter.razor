@@ -1,0 +1,76 @@
+﻿@page "/counter"
+
+<div class="mat-layout-grid">
+    <div class="mat-layout-grid-inner">
+
+        <div class="mat-layout-grid-cell-span-12">
+            <h2 class="mat-h2">Counter</h2>
+            <p>Samples for state management</p>
+        </div>
+        
+        <MatCard Class="mat-layout-grid-cell-span-2">
+            <MatCardContent>
+                <MatHeadline1>@globalCount</MatHeadline1>
+                <MatSubtitle1>Current GLOBAL count</MatSubtitle1>
+            </MatCardContent>
+            <MatCardActions>
+                <MatCardActionButtons>
+                    <MatButton OnClick="IncrementGlobalCount">Increment</MatButton>
+                </MatCardActionButtons>
+            </MatCardActions>
+        </MatCard>
+
+        <AuthorizeView>
+            <Authorized>
+                <MatCard Class="mat-layout-grid-cell-span-2">
+                    <MatCardContent>
+                        <MatHeadline1>@userCount</MatHeadline1>
+                        <MatSubtitle1>Current USER count</MatSubtitle1>
+                    </MatCardContent>
+                    <MatCardActions>
+                        <MatCardActionButtons>
+                            <MatButton OnClick="IncrementUserCount">Increment</MatButton>
+                        </MatCardActionButtons>
+                    </MatCardActions>
+                </MatCard>
+            </Authorized>
+        </AuthorizeView>
+        
+        <MatCard Class="mat-layout-grid-cell-span-2">
+            <MatCardContent>
+                <MatHeadline1>@scopedCount</MatHeadline1>
+                <MatSubtitle1>Current CIRCUIT count</MatSubtitle1>
+            </MatCardContent>
+            <MatCardActions>
+                <MatCardActionButtons>
+                    <MatButton OnClick="IncrementScopedCount">Increment</MatButton>
+                </MatCardActionButtons>
+            </MatCardActions>
+        </MatCard>
+        
+        <MatCard Class="mat-layout-grid-cell-span-2">
+            <MatCardContent>
+                <MatHeadline1>@sessionCount</MatHeadline1>
+                <MatSubtitle1>Current SESSION (custom) count</MatSubtitle1>
+            </MatCardContent>
+            <MatCardActions>
+                <MatCardActionButtons>
+                    <MatButton OnClick="IncrementSessionCount">Increment</MatButton>
+                </MatCardActionButtons>
+            </MatCardActions>
+        </MatCard>
+
+        <MatCard Class="mat-layout-grid-cell-span-2">
+            <MatCardContent>
+                <MatHeadline1>@componentCount</MatHeadline1>
+                <MatSubtitle1>Current COMPONENT count</MatSubtitle1>
+            </MatCardContent>
+            <MatCardActions>
+                <MatCardActionButtons>
+                    <MatButton OnClick="IncrementComponentCount">Increment</MatButton>
+                </MatCardActionButtons>
+            </MatCardActions>
+        </MatCard>
+
+    </div>
+</div>

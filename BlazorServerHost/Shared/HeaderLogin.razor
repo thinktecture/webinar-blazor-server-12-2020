@@ -1,0 +1,42 @@
+﻿@using BlazorServerHost.Services
+@inject NavigationManager navigationManager
+@inject IdentityAuthenticationStateProvider authStateProvider
+
+<AuthorizeView Context="AuthorizeContext">
+    <Authorized>
+        
+            @username
+            <MatTooltip Tooltip="Profile">
+                <MatIconButton Icon="perm_identity" RefBack="@context" Link="auth/profile"></MatIconButton>
+            </MatTooltip>
+        
+        <MatTooltip Tooltip="Logout">
+            <MatIconButton Icon="exit_to_app" RefBack="@context" OnClick="LogoutClick"></MatIconButton>
+        </MatTooltip>
+    </Authorized>
+    <NotAuthorized>
+        <MatTooltip Tooltip="Sign in">
+            <MatIconButton Icon="account_box" RefBack="@context" Link="auth/login"></MatIconButton>
+        </MatTooltip>
+    </NotAuthorized>
+</AuthorizeView>
+
+
+@code {
+    private string username;
+
+    async Task LogoutClick()
+    {
+        await authStateProvider.LogoutAsync();
+        // navigationManager.NavigateTo("/account/login");
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        var state = await authStateProvider.GetAuthenticationStateAsync();
+        username = state.User?.Identity?.Name;
+    }
+
+}

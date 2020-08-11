@@ -1,0 +1,162 @@
+﻿<i class="@classes" aria-hidden="true"></i>
+@code {
+   [Parameter]
+   public string icon { get; set; }
+
+   [Parameter]
+   public Size size { get; set; }
+
+   [Parameter]
+   public bool fixedWidth { get; set; }
+
+   [Parameter]
+   public bool listIcon { get; set; }
+
+   [Parameter]
+   public bool border { get; set; }
+
+   [Parameter]
+   public Pull pull { get; set; }
+
+   [Parameter]
+   public Spin spin { get; set; }
+
+   [Parameter]
+   public Rotate rotate { get; set; }
+
+   [Parameter]
+   public Flip flip { get; set; }
+
+   [Parameter]
+   public bool inverse { get; set; }
+
+   private string classes
+   {
+       get
+       {
+           var sb = new System.Text.StringBuilder();
+
+           sb.Append("fa fa-");
+           sb.Append(icon);
+
+           switch (size)
+           {
+               case Size.Lg:
+                   sb.Append(" fa-lg");
+                   break;
+               case Size.x2:
+                   sb.Append(" fa-2x");
+                   break;
+               case Size.x3:
+                   sb.Append(" fa-3x");
+                   break;
+               case Size.x4:
+                   sb.Append(" fa-4x");
+                   break;
+               case Size.x5:
+                   sb.Append(" fa-5x");
+                   break;
+               default:
+                   break;
+           }
+
+           if (fixedWidth) sb.Append(" fa-fw");
+           if (listIcon) sb.Append(" fa-li");
+           if (border) sb.Append(" fa-border");
+
+           switch (pull)
+           {
+               case Pull.Left:
+                   sb.Append(" fa-pull-left");
+                   break;
+               case Pull.Right:
+                   sb.Append(" fa-pull-right");
+                   break;
+               default:
+                   break;
+           }
+
+           switch (spin)
+           {
+               case Spin.Spin:
+                   sb.Append(" fa-spin");
+                   break;
+               case Spin.Pulse:
+                   sb.Append(" fa-pulse");
+                   break;
+               default:
+                   break;
+           }
+
+           switch (rotate)
+           {
+               case Rotate.R90:
+                   sb.Append(" fa-rotate-90");
+                   break;
+               case Rotate.R180:
+                   sb.Append(" fa-rotate-180");
+                   break;
+               case Rotate.R270:
+                   sb.Append(" fa-rotate-270");
+                   break;
+               default:
+                   break;
+           }
+
+           switch (flip)
+           {
+               case Flip.Horizontal:
+                   sb.Append(" fa-flip-horizontal");
+                   break;
+               case Flip.Vertical:
+                   sb.Append(" fa-flip-vertical");
+                   break;
+               default:
+                   break;
+           }
+           
+           if (inverse) sb.Append(" inverse");
+
+           return sb.ToString();
+       }
+   }
+
+   public enum Size
+   {
+       Default,
+       Lg,
+       x2,
+       x3,
+       x4,
+       x5,
+   }
+
+   public enum Pull
+   {
+       None,
+       Left,
+       Right,
+   }
+
+   public enum Spin
+   {
+       None,
+       Spin,
+       Pulse,
+   }
+
+   public enum Rotate
+   {
+       None,
+       R90,
+       R180,
+       R270,
+   }
+
+   public enum Flip
+   {
+       None,
+       Horizontal,
+       Vertical,
+   }
+}

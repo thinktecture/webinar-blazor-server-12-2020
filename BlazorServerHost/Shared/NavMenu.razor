@@ -1,0 +1,20 @@
+﻿
+<MatNavMenu>
+    <MatNavItem Href="" NavLinkMatch="NavLinkMatch.All">
+        <MatIcon Icon="home" />&nbsp; Home
+    </MatNavItem>
+    <MatNavItem Href="counter">
+        <MatIcon Icon="note_add" />&nbsp; Counter
+    </MatNavItem>
+    <MatNavItem Href="fetchdata">
+        <MatIcon Icon="list" />&nbsp; Fetch data
+    </MatNavItem>
+
+    <AuthorizeView Context="AuthorizeContext">
+        <Authorized>
+            <MatNavItem Href="usermanagement">
+                <FaIcon icon="users" fixedWidth="true" size="FaIcon.Size.Lg" inverse="true" />&nbsp; User Management
+            </MatNavItem>
+        </Authorized>
+    </AuthorizeView>
+</MatNavMenu>

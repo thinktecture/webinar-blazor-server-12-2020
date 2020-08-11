@@ -1,0 +1,46 @@
+﻿@inherits LayoutComponentBase
+
+<MatThemeProvider Theme="@_theme">
+    <MatAppBar Style="z-index: 100;" Class="mat">
+        <MatAppBarRow>
+            <MatAppBarSection>
+                <MatIconButton Icon="menu" OnClick="@ToggleNavigation"></MatIconButton>
+
+                <MatAppBarTitle>
+                    Blazor Server Sample
+                </MatAppBarTitle>
+            </MatAppBarSection>
+
+            <MatAppBarSection Align="@MatAppBarSectionAlign.End">
+                <HeaderLogin />
+            </MatAppBarSection>
+        </MatAppBarRow>
+
+    </MatAppBar>
+
+    <MatDrawerContainer Style="width: 100vw; height: 100vh;" Class="mat">
+        <MatDrawer @bind-Opened="@_menuOpen" Mode="MatDrawerMode.Dismissible" Class="no-outline">
+            <MatAppBarAdjust></MatAppBarAdjust>
+
+            <NavMenu />
+        </MatDrawer>
+
+        <MatDrawerContent Class="mdc-theme--background">
+            <MatAppBarAdjust></MatAppBarAdjust>
+            <div class="body-wrapper">
+                @Body
+            </div>
+        </MatDrawerContent>
+    </MatDrawerContainer>
+</MatThemeProvider>
+@code
+{
+    private MatTheme _theme = new MatTheme() { Primary = "#ff584f", Secondary = "#e2e4eb" };
+
+    bool _menuOpen = true;
+
+    void ToggleNavigation(EventArgs e)
+    {
+        _menuOpen = !_menuOpen;
+    }
+}

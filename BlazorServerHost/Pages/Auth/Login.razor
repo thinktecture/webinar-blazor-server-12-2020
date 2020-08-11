@@ -1,0 +1,35 @@
+﻿@page "/auth/login"
+@page "/auth/login/{returnUrl}"
+
+<div class="card-centered">
+    <MatCard class="auth-mat-card">
+        <div class="auth-mat-card-content">
+            <MatHeadline6 class="auth-mat-card-clean-margin">
+                Sign in
+            </MatHeadline6>
+        </div>
+        <MatCardContent>
+
+            <EditForm Model="@_loginParameters" OnValidSubmit="@SubmitLogin">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+                <fieldset>
+                    <div class="form-group">
+                        <MatTextField id="userName" @bind-Value="@_loginParameters.UserName" Label="User Name" Icon="person" IconTrailing="true" FullWidth="true" Required="true" tabindex="1"></MatTextField>
+                    </div>
+                    <div class="form-group">
+                        <MatTextField @bind-Value="@_loginParameters.Password" Label="Password" Icon="lock_outline" IconTrailing="true" FullWidth="true" Required="true" Type="password" tabindex="2"></MatTextField>
+                    </div>
+                    <div class="form-group">
+                        <MatButton class="float-right" Type="submit" Raised="true" tabindex="3">Login</MatButton>
+                        <MatCheckbox @bind-Value="@_loginParameters.RememberMe" class="filled-in chk-col-blue">Remember Me</MatCheckbox>
+                    </div>
+                    <hr />
+                    <div>
+                        <MatButton class="float-left" OnClick="@Register" Raised="true">Create account</MatButton>
+                    </div>
+                </fieldset>
+            </EditForm>
+        </MatCardContent>
+    </MatCard>
+</div>

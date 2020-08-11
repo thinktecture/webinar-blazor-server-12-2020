@@ -1,0 +1,53 @@
+﻿@page "/fetchdata"
+
+@using BlazorServerHost.Data
+@using _Imports = BlazorServerHost._Imports
+@inject WeatherForecastService ForecastService
+
+<div class="mat-layout-grid">
+    <div class="mat-layout-grid-inner">
+        <div class="mat-layout-grid-cell-span-12">
+
+            <h3 class="mat-h3">Weather Forecast</h3>
+            <p>This component demonstrates fetching data from a service.</p>
+
+            @if (forecasts == null)
+            {
+                <h3 class="mat-subtitle1">Fetching data...</h3>
+                <MatProgressBar Indeterminate="true"></MatProgressBar>
+            }
+            else
+            {
+                <div>
+                    <MatTable Items="@forecasts" Class="mat-elevation-z5">
+                        <MatTableHeader>
+                            <th>Date</th>
+                            <th>Temp. (C)</th>
+                            <th>Temp. (F)</th>
+                            <th>Summary</th>
+                        </MatTableHeader>
+                        <MatTableRow>
+                            <td>@context.Date.ToShortDateString()</td>
+                            <td>@context.TemperatureC</td>
+                            <td>@context.TemperatureF</td>
+                            <td>@context.Summary</td>
+                        </MatTableRow>
+                    </MatTable>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+@code {
+   private WeatherForecast[] forecasts = null;
+
+   protected override async Task OnInitializedAsync()
+   {
+       await Task.Delay(TimeSpan.FromSeconds(1))
+           .ContinueWith(async _ =>
+               forecasts = await ForecastService.GetForecastAsync(DateTime.Now)
+           );
+   }
+}

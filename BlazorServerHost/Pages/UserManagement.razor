@@ -1,0 +1,34 @@
+﻿@page "/usermanagement"
+
+<div class="mat-layout-grid">
+    <div class="mat-layout-grid-inner">
+        <div class="mat-layout-grid-cell-span-12">
+
+            <h3 class="mat-h3">User management</h3>
+            <p>Manage the users</p>
+        @if (users == null)
+        {
+            <h3 class="mat-subtitle1">Fetching data...</h3>
+            <MatProgressBar Indeterminate="true"></MatProgressBar>
+        }
+        else
+        {
+            <div>
+                <MatTable Items="@users" Class="mat-elevation-z5" ShowPaging="false" pageSize="@pageSize">
+                    <MatTableHeader>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Confirmed</th>
+                    </MatTableHeader>
+                    <MatTableRow>
+                        <td>@context.Username</td>
+                        <td>@context.EMail</td>
+                        <td>@context.EMailConfirmed</td>
+                    </MatTableRow>
+                </MatTable>
+                <MatPaginator length="@userCount" pageSize="@pageSize" pageIndex="@pageIndex" Page="OnPageAsync"></MatPaginator>
+            </div>
+        }
+        </div>
+    </div>
+</div>

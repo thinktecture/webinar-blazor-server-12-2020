@@ -1,0 +1,61 @@
+﻿@page "/"
+@using Microsoft.Extensions.Logging
+@using Microsoft.AspNetCore.Components.Server.Circuits
+@using BlazorServerHost.Services
+@using Microsoft.AspNetCore.Identity.UI.V3.Pages.Internal.Account
+
+@inject ILogger<Index> _logger;
+@inject CircuitStore _circuitStore;
+
+<div class="mat-layout-grid">
+    <div class="mat-layout-grid-inner">
+
+        <div class="mat-layout-grid-cell-span-12">
+            <h1 class="mat-h1">Blazor Server Demo</h1>
+            <h2 class="mat-h2">Welcome to this sample application</h2>
+        </div>
+
+        @if (InitialState == 0)
+        {
+            <p>Waiting for circuit to be initialized...</p>
+            <MatProgressBar Indeterminate="true"></MatProgressBar>
+        }
+        else
+        {
+            <p>Random initial value: @InitialState.</p>
+        }
+    </div>
+</div>
+
+@code {
+
+    [Parameter]
+    public int InitialState { get; set; } = 0;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await base.OnParametersSetAsync();
+
+        if (_circuitStore.HasCircuit)
+        {
+            if (InitialState == 0)
+            {
+                var value = await _circuitStore.LoadValueAsync("Index_InitialState");
+
+                if (!int.TryParse(value, out var state))
+                {
+                    await Task.Delay(TimeSpan.FromSeconds(3));
+
+                    var rng = new Random();
+                    state = rng.Next(0, 100);
+                }
+
+                InitialState = state;
+            }
+
+            await _circuitStore.SaveValueAsync("Index_InitialState", InitialState.ToString());
+        }
+
+        _logger.LogInformation("Component {Component} parameter value is {InitialStateValue}", nameof(Index), InitialState);
+    }
+}

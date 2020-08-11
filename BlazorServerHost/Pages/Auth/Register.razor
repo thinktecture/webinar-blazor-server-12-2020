@@ -1,0 +1,42 @@
+﻿@page "/auth/register"
+
+<AuthorizeView Context="AuthorizeContext">
+    <Authorized>
+        You are already signed in and can't register again.
+    </Authorized>
+    <NotAuthorized>
+        <div class="card-centered">
+            <MatCard class="auth-mat-card">
+                <div class="auth-mat-card-content">
+                    <MatHeadline6 class="auth-mat-card-clean-margin">
+                        Register
+                    </MatHeadline6>
+                </div>
+                <MatCardContent>
+
+                    <EditForm Model="@_registerModel" OnValidSubmit="@SubmitRegister">
+                        <DataAnnotationsValidator />
+                        <ValidationSummary />
+                        <fieldset>
+                            <div class="form-group">
+                                <MatTextField id="userName" @bind-Value="@_registerModel.UserName" Label="User Name" Icon="person" IconTrailing="true" FullWidth="true" Required="true" tabindex="1"></MatTextField>
+                            </div>
+                            <div class="form-group">
+                                <MatTextField @bind-Value="@_registerModel.Email" Label="E-mail address" Icon="email" IconTrailing="true" FullWidth="true" Required="true" tabindex="2"></MatTextField>
+                            </div>
+                            <div class="form-group">
+                                <MatTextField @bind-Value="@_registerModel.Password" Label="Password" Icon="lock_outline" IconTrailing="true" FullWidth="true" Required="true" Type="password" tabindex="3"></MatTextField>
+                            </div>
+                            <div class="form-group">
+                                <MatTextField @bind-Value="@_registerModel.PasswordRepeat" Label="repeat Password" FullWidth="true" Required="true" Type="password" tabindex="4"></MatTextField>
+                            </div>
+                            <div class="form-group">
+                                <MatButton class="float-right" Type="submit" Raised="true" tabindex="5">Register new account</MatButton>
+                            </div>
+                        </fieldset>
+                    </EditForm>
+                </MatCardContent>
+            </MatCard>
+        </div>
+    </NotAuthorized>
+</AuthorizeView>

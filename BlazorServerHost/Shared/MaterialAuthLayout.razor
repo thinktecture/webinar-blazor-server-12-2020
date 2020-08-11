@@ -1,0 +1,28 @@
+﻿@inherits LayoutComponentBase
+
+<MatThemeProvider Theme="@_theme">
+    <MatAppBar Style="z-index: 100;" Class="mat">
+        <MatAppBarRow>
+            <MatAppBarSection>
+                <MatAppBarTitle>
+                    Blazor Server Sample
+                </MatAppBarTitle>
+            </MatAppBarSection>
+        </MatAppBarRow>
+    </MatAppBar>
+
+    <div class="mat-layout-grid">
+        <div class="mat-layout-grid-inner">
+            <div class="mat-layout-grid-cell"></div>
+            <div class="mat-layout-grid-cell mat-layout-grid-cell-align-middle">
+                @Body
+            </div>
+            <div class="mat-layout-grid-cell"></div>
+        </div>
+    </div>
+
+</MatThemeProvider>
+@code
+{
+    private MatTheme _theme = new MatTheme() { Primary = "#ff584f", Secondary = "#e2e4eb" };
+}
